@@ -9,6 +9,9 @@ defmodule CheckMonitorPrice.Mixfile do
     [app: :check_monitor_price,
      version: "1.0.0",
      elixir: "~> 1.4",
+     build_embedded: Mix.env == :prod,
+     start_permanent: Mix.env == :prod,
+     escript: [main_module: CheckMonitorPrice.CLI],
      deps: deps()]
   end
 
