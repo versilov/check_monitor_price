@@ -42,9 +42,3 @@ defmodule CheckMonitorPrice.Server do
         |> IO.inspect
   end
 end
-
-defmodule CheckMonitorPrice.CLI do
-  def main(args) do
-    CheckMonitorPrice.Application.start(nil, args)
-  end
-end

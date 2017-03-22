@@ -2,7 +2,7 @@ defmodule CheckMonitorPrice.Mixfile do
   use Mix.Project
 
   def application do
-    [extra_applications: [:httpoison],
+    [extra_applications: [:httpoison, :logger],
      mod: {CheckMonitorPrice.Application, []}]
   end
 
@@ -12,7 +12,7 @@ defmodule CheckMonitorPrice.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     escript: [main_module: CheckMonitorPrice.CLI],
+     escript: [main_module: CheckMonitorPrice.Application],
      deps: deps()]
   end
 
