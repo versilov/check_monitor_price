@@ -24,3 +24,4 @@ erl_crash.dump
 /config/prod.secret.exs
 
 cron.log
+/check_monitor_price
