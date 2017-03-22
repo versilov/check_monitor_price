@@ -2,13 +2,14 @@ defmodule CheckMonitorPrice.Server do
   use GenServer
 
   @product_url "http://technopoint.ru/product/716a6fcfdb6c3330/27-monitor-lg-27ud68-w-sale/"
+  @check_period 30 # In minutes
 
   def start_link do
     GenServer.start_link(__MODULE__, [])
   end
 
   def init(_) do
-    schedule_work(0)
+    schedule_work(0) # First check immediately
     {:ok, load_price()}
   end
 
@@ -19,9 +20,8 @@ defmodule CheckMonitorPrice.Server do
   def handle_info(:check, price) do
     new_price = load_price()
     IO.puts "Current price: #{new_price}"
-    send_sms(new_price) # For debug purposes
     if (new_price != price), do: send_sms(new_price)
-    schedule_work(1)
+    schedule_work(@check_period) #
     {:noreply, new_price}
   end
 
