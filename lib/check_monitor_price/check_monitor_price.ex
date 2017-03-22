@@ -19,6 +19,7 @@ defmodule CheckMonitorPrice.Server do
   def handle_info(:check, price) do
     new_price = load_price()
     IO.puts "Current price: #{new_price}"
+    send_sms(new_price) # For debug purposes
     if (new_price != price), do: send_sms(new_price)
     schedule_work(30)
     {:noreply, new_price}
