@@ -21,7 +21,7 @@ defmodule CheckMonitorPrice.Server do
     IO.puts "Current price: #{new_price}"
     send_sms(new_price) # For debug purposes
     if (new_price != price), do: send_sms(new_price)
-    schedule_work(30)
+    schedule_work(1)
     {:noreply, new_price}
   end
 
