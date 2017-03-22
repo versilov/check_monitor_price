@@ -1,6 +1,14 @@
 defmodule CheckMonitorPrice.Server do
   use GenServer
 
+  @moduledoc """
+  Checks for LG 27ud68 monitor price on site technopoint.ru for Samara region
+  Every 30 minutes
+  Sends SMS if price changes
+  Start on remore server with nohup ./check_monitor_price &
+  Stop with kill PID, find PID with ps -ef | grep check_monitor_price
+  """
+
   @product_url "http://technopoint.ru/product/716a6fcfdb6c3330/27-monitor-lg-27ud68-w-sale/"
   @check_period 30 # In minutes
 
