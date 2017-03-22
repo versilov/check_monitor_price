@@ -1,11 +1,27 @@
-defmodule CheckMonitorPrice do
-  @product_url "http://technopoint.ru/product/716a6fcfdb6c3330/27-monitor-lg-27ud68-w-sale/"
-  @old_price 30_999
+defmodule CheckMonitorPrice.Server do
+  use GenServer
 
-  def check do
+  @product_url "http://technopoint.ru/product/716a6fcfdb6c3330/27-monitor-lg-27ud68-w-sale/"
+
+  def start_link do
+    GenServer.start_link(__MODULE__, [])
+  end
+
+  def init(_) do
+    schedule_work(0)
+    {:ok, load_price()}
+  end
+
+  defp schedule_work(t) do
+    Process.send_after(self(), :check, t * 60 * 1_000)
+  end
+
+  def handle_info(:check, price) do
     new_price = load_price()
     IO.puts "Current price: #{new_price}"
-    if (new_price != @old_price), do: send_sms(new_price)
+    if (new_price != price), do: send_sms(new_price)
+    schedule_work(30)
+    {:noreply, new_price}
   end
 
   defp load_price do
@@ -28,7 +44,7 @@ defmodule CheckMonitorPrice do
 end
 
 defmodule CheckMonitorPrice.CLI do
-  def main(_args) do
-    CheckMonitorPrice.check()
+  def main(args) do
+    CheckMonitorPrice.Application.start(nil, args)
   end
 end

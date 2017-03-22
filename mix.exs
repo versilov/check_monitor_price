@@ -2,7 +2,8 @@ defmodule CheckMonitorPrice.Mixfile do
   use Mix.Project
 
   def application do
-    [applications: [:httpoison]]
+    [extra_applications: [:httpoison],
+     mod: {CheckMonitorPrice.Application, []}]
   end
 
   def project do
