@@ -9,7 +9,7 @@ defmodule CheckMonitorPrice.Server do
   Stop with kill PID, find PID with ps -ef | grep check_monitor_price
   """
 
-  @product_url "http://technopoint.ru/product/716a6fcfdb6c3330/27-monitor-lg-27ud68-w-sale/"
+  @product_url "http://technopoint.ru/product/b5c3c1e47dfe3330/27-monitor-lg-27ud88-w-27ud88-waruz-sale/?finalize=1"
   @check_period 30 # In minutes
 
   def start_link do
